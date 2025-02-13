@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Road+Rage&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme{
+  --font-namum: "Nanum Myeongjo";
+  --font-roboto: "Roboto";
+  --font-rage: "Road Rage";
+  --font-alatsi: "Alatsi"
+}
+
+button{
+  cursor: pointer;
+}
+
+button:hover{
+  opacity: 80%;
+}
+
+.ticket-type button:active{
+  background-color: #12464E;
+}
+
+.ticket-type > .active {
+  background-color: #12464E;
+}
+
+.clip-path-1{
+  clip-path: path("M 0,15 A 15,15 0,0,0 15,0 L 285,0 A 15,15 0,0,0 300,15 L 300,465 A 15,15 0,0,0 285,480 L 15,480 A 15,15 0,0,0 0,465 L 0,15 Z");
+}
+
+.clip-path-2{
+  clip-path: path("M 0,15 A 15,15 0,0,0 15,0 L 281,0 A 15,15 0,0,0 296,15 L 296,461 A 15,15 0,0,0 281,476 L 15,476 A 15,15 0,0,0 0,461 L 0,15 Z");
+}
+
+.clip-path-3{
+  clip-path: path("M 0,15 A 15,15 0,0,0 15,0 L 285,0 A 15,15 0,0,0 300,15 L 300,105 A 15,15 0,0,0 285,120 L 15,120 A 15,15 0,0,0 0,105 L 0,15 Z");
+}
+
+.clip-path-4{
+  clip-path: path("M 0,15 A 15,15 0,0,0 15,0 L 281,0 A 15,15 0,0,0 296,15 L 296,101 A 15,15 0,0,0 281,116 L 15,116 A 15,15 0,0,0 0,101 L 0,15 Z");
+}
