@@ -1,8 +1,30 @@
 import { useNavigate } from "react-router-dom"
 
-const Ready = () => {
+const Ready = ( {fullDetails} ) => {
+
+  const [state_imgUrl, setImagUrl] = fullDetails.imgUrl
+  const [state_name, setName] = fullDetails.name
+  const [state_email, setEmail] = fullDetails.email
+  const [state_request, setRequest] = fullDetails.request
+  const [state_tickets, setTickets] = fullDetails.tickets
+  const [state_ticketType, setTicketType] = fullDetails.ticketType
+
   const navigate = useNavigate()
-  const {email, imageUrl, name, request, ticketType, tickets} = JSON.parse(localStorage.getItem('details'))
+  const {email, imgUrl, name, request, ticketType, tickets} = JSON.parse(localStorage.getItem('details'))
+
+  function handleNewTicket () {
+    localStorage.removeItem('details')
+    console.log('done')
+
+    setImagUrl('')
+    setName('')
+    setEmail('')
+    setRequest('')
+    setTicketType('REGULAR')
+    setTickets(1)
+
+    navigate('/')
+  }
   
   return (
     <div className="w-full flex justify-center">
@@ -51,15 +73,15 @@ const Ready = () => {
                 📅 March 15, 2025 | 7:00 PM
                 </p>
 
-                <div className="size-[140px] border-4 border-[#24A0B5]/50 rounded-[12px] my-3 flex items-center justify-center">
+                <div className="size-[140px] border-4 border-[#24A0B5]/50 rounded-[12px] my-3 flex items-center justify-center overflow-hidden">
 
-                  <img src={imageUrl || "icons/ticz.svg"} alt="uploaded photo" className="w-full object-cover"/>
+                  <img src={imgUrl || "icons/ticz.svg"} alt="uploaded photo" className="size-full object-cover"/>
                   
                 </div>
 
-                <div className="w-full bg-r rounded-[8px] bg-[#08343C] border border-[#133D44] grid grid-cols-2">
+                <div className="w-full bg-r rounded-[8px] bg-[#08343C] border border-[#133D44] grid grid-cols-2 p-1">
 
-                  <div className="p-1">
+                  <div className="p-1 border-r border-b border-white/20">
                     <p className="font-roboto text-[10px] text-white/33">
                       Name:
                     </p>
@@ -69,7 +91,7 @@ const Ready = () => {
                     </p>
                   </div>
 
-                  <div className="p-1 max-w-[90px] overflow-hidden text-ellipsis">
+                  <div className="p-1 max-w-[105px] overflow-hidden text-ellipsis border-b border-white/20">
                     <p className="font-roboto text-[10px] text-white/33">
                       Email:
                     </p>
@@ -79,7 +101,7 @@ const Ready = () => {
                     </p>
                   </div>
 
-                  <div className="p-1">
+                  <div className="p-1 border-r border-b border-white/20">
                     <p className="font-roboto text-[10px] text-white/33">
                       Ticket Type:
                     </p>
@@ -89,7 +111,7 @@ const Ready = () => {
                     </p>
                   </div>
 
-                  <div className="p-1">
+                  <div className="p-1 border-b border-white/20">
                     <p className="font-roboto text-[10px] text-white/33">
                       Ticket for:
                     </p>
@@ -130,7 +152,7 @@ const Ready = () => {
 
         <div className="flex gap-6 mt-8 font-namum text-[16px] max-[550px]:flex-col-reverse">
 
-          <button className="grow max-w-1/2 border border-[#197686] rounded-[8px] text-[#24A0B5] p-3 max-[550px]:max-w-full" onClick={()=>{navigate('/')}}>
+          <button className="grow max-w-1/2 border border-[#197686] rounded-[8px] text-[#24A0B5] p-3 max-[550px]:max-w-full" onClick={()=>{handleNewTicket()}}>
             Book Another Ticket
           </button>
 

@@ -15,6 +15,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
   const [loading, setLoading] = useState(false)
   const [isValidEmail, setisvalid] = useState(true)
   const [mailRequired, setMailRequired] = useState(false)
+  const [photoeRequired, setPhotoRequired] = useState(false)
 
   const navigate = useNavigate()
 
@@ -28,10 +29,18 @@ const AttendeeDetails = ( {fullDetails} ) => {
       return
     }
 
+    if (!imgUrl) {      
+      setPhotoRequired(true)
+      setTimeout(() => {
+        setPhotoRequired(false)
+      }, 3000);
+      return
+    }
+
     const details = {
       'ticketType': ticketType,
       'tickets': tickets,
-      'imageUrl': imgUrl,
+      'imgUrl': imgUrl,
       'name': name,
       'email': email,
       'request': request
@@ -47,6 +56,11 @@ const AttendeeDetails = ( {fullDetails} ) => {
     if (input === 'email') {
       setEmail(e.target.value)
       setisvalid(isEmail(email))
+
+      if(!e.target.value){
+        console.log('here')
+        setisvalid(true)
+      }
     }
     if (input === 'request') setRequest(e.target.value)
 
@@ -126,7 +140,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
 
         <form className="bg-[#08252B] border border-[#0E464F] w-full rounded-[32px] flex flex-col p-[24px]">
 
-          <div className="max-w-[556px] p-6 bg-[#052228] border border-[#07373F] rounded-[24px]" >
+          <div className="relative max-w-[556px] p-6 bg-[#052228] border border-[#07373F] rounded-[24px]" >
             <p className="font-roboto text-[16px] mb-2">
               Upload Profile Photo
             </p>
@@ -149,11 +163,16 @@ const AttendeeDetails = ( {fullDetails} ) => {
                   </label>
                 </div>                  
 
-                <input hidden type="file" accept="image/*" id="file-input" onChange={(e)=>{handleUpload(e)}} className="absolute -z-10"/>          
+                <input hidden type="file" accept="image/*" id="file-input" onChange={(e)=>{handleUpload(e)}} className="absolute -z-10"/> 
 
               </div>
             </div>
-          </div>       
+
+            {!photoeRequired? '': <p className="text-red-500 text-sm absolute left-1 -bottom-6">
+              Photo upload is required!
+            </p>}  
+
+            </div>       
           
 
           <hr className="border-2 border-[#07373F] my-8" />

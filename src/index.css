@@ -24,6 +24,10 @@ button:hover{
   background-color: #12464E;
 }
 
+input[type="radio"]:checked + label {
+  background-color: #12464E;
+}
+
 .clip-path-1{
   clip-path: path("M 0,15 A 15,15 0,0,0 15,0 L 285,0 A 15,15 0,0,0 300,15 L 300,465 A 15,15 0,0,0 285,480 L 15,480 A 15,15 0,0,0 0,465 L 0,15 Z");
 }

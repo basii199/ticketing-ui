@@ -11,11 +11,6 @@ const TicketSelection = ( {fullDetails} ) => {
   }
 
   function handleClick (e, type){
-    const prev = document.querySelector('.active')
-    if(prev) prev.classList.remove('active')
-
-    e.target.classList.add('active')
-
     setTicketType(type)
   }
 
@@ -69,10 +64,12 @@ const TicketSelection = ( {fullDetails} ) => {
           <p className="font-roboto text-[16px] mb-2">
             Select Ticket Type:
           </p>
+          
 
           <div className="ticket-type bg-[#052228] border border-[#07373F] rounded-[24px] p-4 flex justify-between gap-[25px] max-[550px]:flex-col ">
 
-            <button className="active p-3 border border-[#197686] rounded-[12px] flex flex-col" onClick={(e)=>handleClick(e, 'REGULAR')}>
+            <input defaultChecked hidden type="radio" name="ticket-type" id="REGULAR"/>
+            <label htmlFor="REGULAR" className="p-3 border border-[#197686] rounded-[12px] flex flex-col" onClick={(e)=>handleClick(e, 'REGULAR')}>
               <p className="font-roboto text-[24px] mb-3">
                 Free
               </p>
@@ -84,9 +81,10 @@ const TicketSelection = ( {fullDetails} ) => {
               <p className="font-roboto text-[14px] text-[#D9D9D9]">
                 20/52
               </p>
-            </button>
+            </label>
 
-            <button className="flex flex-col p-3 grow bg-[#052228] border border-[#197686] rounded-[12px]" onClick={(e)=>handleClick(e, 'VIP')}>
+            <input hidden type="radio" name="ticket-type" id="VIP"/>
+            <label htmlFor="VIP" className="flex flex-col p-3 grow bg-[#052228] border border-[#197686] rounded-[12px]" onClick={(e)=>handleClick(e, 'VIP')}>
               <p className="font-roboto text-[24px] mb-3">
                 $100
               </p>
@@ -98,9 +96,10 @@ const TicketSelection = ( {fullDetails} ) => {
               <p className="font-roboto text-[14px] text-[#D9D9D9]">
                 20/52
               </p>
-            </button>
+            </label>
 
-            <button className="flex flex-col p-3 grow bg-[#052228] border border-[#197686] rounded-[12px]" onClick={(e)=>handleClick(e, 'VVIP')}>
+            <input hidden type="radio" name="ticket-type" id="VVIP"/>
+            <label htmlFor="VVIP" className="flex flex-col p-3 grow bg-[#052228] border border-[#197686] rounded-[12px]" onClick={(e)=>handleClick(e, 'VVIP')}>
               <p className="font-roboto text-[24px] mb-3">
                 $150
               </p>
@@ -112,7 +111,7 @@ const TicketSelection = ( {fullDetails} ) => {
               <p className="font-roboto text-[14px] text-[#D9D9D9]">
                 20/52
               </p>
-            </button>
+            </label>
 
           </div>
 
@@ -140,8 +139,7 @@ const TicketSelection = ( {fullDetails} ) => {
 
           </div>
         </div>
-      </div>
-      
+      </div>      
     </div>
   )
 }
