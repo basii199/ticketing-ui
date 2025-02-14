@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom"
+
 const Ready = () => {
+  const navigate = useNavigate()
+  const {email, imageUrl, name, request, ticketType, tickets} = JSON.parse(localStorage.getItem('details'))
+  
   return (
     <div className="w-full flex justify-center">
       <div className="w-[700px] bg-[#041E23] border border-[#0E464F] p-[48px] mt-[48px] rounded-[40px]">
@@ -46,8 +51,10 @@ const Ready = () => {
                 📅 March 15, 2025 | 7:00 PM
                 </p>
 
-                <div className="size-[140px] border-4 border-[#24A0B5]/50 rounded-[12px] my-3">
-                  {/* Profile pic */}
+                <div className="size-[140px] border-4 border-[#24A0B5]/50 rounded-[12px] my-3 flex items-center justify-center">
+
+                  <img src={imageUrl || "icons/ticz.svg"} alt="uploaded photo" className="w-full object-cover"/>
+                  
                 </div>
 
                 <div className="w-full bg-r rounded-[8px] bg-[#08343C] border border-[#133D44] grid grid-cols-2">
@@ -57,18 +64,18 @@ const Ready = () => {
                       Name:
                     </p>
 
-                    <p className="font-roboto text-[12px] font-bold mt-1.5">
-                      Avi Chukwu
+                    <p className="font-roboto text-[12px] font-bold mt-1.5 max-w-[90px] overflow-hidden text-ellipsis">
+                      {name}
                     </p>
                   </div>
 
-                  <div className="p-1">
+                  <div className="p-1 max-w-[90px] overflow-hidden text-ellipsis">
                     <p className="font-roboto text-[10px] text-white/33">
                       Email:
                     </p>
 
-                    <p className="font-roboto text-[12px] font-bold mt-1.5">
-                      user@email.com
+                    <p className="font-roboto text-[12px] font-bold mt-1.5 ">
+                      {email}
                     </p>
                   </div>
 
@@ -78,7 +85,7 @@ const Ready = () => {
                     </p>
 
                     <p className="font-roboto text-[12px]  mt-1.5">
-                      VIP
+                      {ticketType || '-'}
                     </p>
                   </div>
 
@@ -88,7 +95,7 @@ const Ready = () => {
                     </p>
 
                     <p className="font-roboto text-[12px] font-bold mt-1.5">
-                      1
+                      {tickets || '-'}
                     </p>
                   </div>
 
@@ -98,7 +105,7 @@ const Ready = () => {
                     </p>
 
                     <p className="font-roboto text-[10px] mt-1.5 line-clamp-2">
-                      Nil uhdiohdjsjsijkjl ihspipo mbuddiu gugidduhiud duigdhuduuhd usgsibus gsisyffshsg gsuigsyf gysyfsy syufysqggiq  sgyqguisq fsuyqisy
+                      {request || '-'}
                     </p>
                   </div>                
 
@@ -123,7 +130,7 @@ const Ready = () => {
 
         <div className="flex gap-6 mt-8 font-namum text-[16px] max-[550px]:flex-col-reverse">
 
-          <button className="grow max-w-1/2 border border-[#197686] rounded-[8px] text-[#24A0B5] p-3 max-[550px]:max-w-full">
+          <button className="grow max-w-1/2 border border-[#197686] rounded-[8px] text-[#24A0B5] p-3 max-[550px]:max-w-full" onClick={()=>{navigate('/')}}>
             Book Another Ticket
           </button>
 

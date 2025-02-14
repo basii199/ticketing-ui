@@ -9,7 +9,7 @@ import AttendeeDetails from './components/AttendeeDetails'
 import Ready from './components/Ready'
 
 const App = () => {
-  const [tickets , setTickets] = useState(0)
+  const [tickets , setTickets] = useState(1)
   const [ticketType , setTicketType] = useState('REGULAR')
   const [imgUrl, setImagUrl] = useState('')
   const [name , setName] = useState('')

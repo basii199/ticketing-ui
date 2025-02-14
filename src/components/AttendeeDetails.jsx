@@ -13,23 +13,31 @@ const AttendeeDetails = ( {fullDetails} ) => {
   const [ticketType, setTicketType] = fullDetails.ticketType
 
   const [loading, setLoading] = useState(false)
-  let [isValidEmail, setisvalid] = useState(true)
+  const [isValidEmail, setisvalid] = useState(true)
+  const [mailRequired, setMailRequired] = useState(false)
 
   const navigate = useNavigate()
 
   function handleSubmit(e){
     e.preventDefault()
-    if (!email) return
+    if (!email) {      
+      setMailRequired(true)
+      setTimeout(() => {
+        setMailRequired(false)
+      }, 3000);
+      return
+    }
 
     const details = {
-      'ticket-type': ticketType,
+      'ticketType': ticketType,
       'tickets': tickets,
-      'image-url': imgUrl,
+      'imageUrl': imgUrl,
       'name': name,
       'email': email,
       'request': request
     }
     localStorage.setItem('details', JSON.stringify(details))
+
     navigate('/ready')
   }
 
@@ -39,7 +47,6 @@ const AttendeeDetails = ( {fullDetails} ) => {
     if (input === 'email') {
       setEmail(e.target.value)
       setisvalid(isEmail(email))
-      console.log(isValidEmail)
     }
     if (input === 'request') setRequest(e.target.value)
 
@@ -66,6 +73,36 @@ const AttendeeDetails = ( {fullDetails} ) => {
 
     setLoading(false)
   }  
+
+  async function handleDrop(e){
+    e.preventDefault()
+
+    if(e.dataTransfer.items){
+      const item = e.dataTransfer.items[0]
+      const file = item.getAsFile();
+      console.log(file.type)
+      console.log(file)        
+      
+      if(!file) return
+      setLoading(true)
+  
+      const data = new FormData()
+      data.append('file', file)
+      data.append('upload_preset', 'my-preset-1')
+      data.append('cloud_name', 'dj5wh1pcv')
+  
+      const res = await fetch('https://api.cloudinary.com/v1_1/dj5wh1pcv/upload',{
+        method: 'POST',
+        body: data
+      })
+      
+      const url = await res.json()
+      setImagUrl(url.url)
+  
+      setLoading(false)
+    }
+
+  }
 
   return (
     <div className="w-full flex justify-center">
@@ -104,7 +141,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
 
                 {imgUrl? <img className="z-20 size-full object-cover hover:opacity-50" src={imgUrl} alt="uploaded photo" /> : ''} 
 
-                <div className="absolute p-6 flex flex-col items-center justify-center">
+                <div className="absolute p-6 flex flex-col items-center justify-center" onDragOver={e=>{e.preventDefault()}} onDrop={e=>handleDrop(e)}>
                   <img src="icons/cloud.svg" alt="cloud icon" />
 
                   <label htmlFor="file-input" className="text-center w-[176px] mt-4 font-roboto text-[16px] cursor-pointer hover:opacity-80" >
@@ -136,8 +173,12 @@ const AttendeeDetails = ( {fullDetails} ) => {
 
             <img className="absolute top-1/2 -translate-y-1/2 left-[14px]" src="icons/mail.svg" alt="mail icon" />
 
-            {isValidEmail? '': <p className="text-red-500 text-xs absolute left-1">
-              Please enter valid email
+            {isValidEmail? '': <p className="text-red-500 text-sm absolute left-1">
+              Please enter a valid email
+            </p>}
+
+            {!mailRequired? '': <p className="text-red-500 text-sm absolute left-1">
+              Email is a required field!
             </p>}
           </div>
 
