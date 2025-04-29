@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  /* base: "/HNG-12-FE-Event-Ticket-Booking-UI" */
+  base: "/ticketing-ui"
 })

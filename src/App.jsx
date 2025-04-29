@@ -29,7 +29,7 @@ const App = () => {
     <>
       <Header />
 
-      <BrowserRouter /* basename='/HNG-12-FE-Event-Ticket-Booking-UI/' */>
+      <BrowserRouter basename='/ticketing-ui/'>
         <Routes>
 
           <Route path='/' element = {<TicketSelection fullDetails={fullDetails}/>}/>
