@@ -1,23 +1,37 @@
 import { Link, useNavigate } from "react-router-dom"
 import { SpinningCircles } from "react-loading-icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import isEmail from "validator/lib/isEmail"
 
 const AttendeeDetails = ( {fullDetails} ) => {
 
+  
   const [imgUrl, setImagUrl] = fullDetails.imgUrl
   const [name, setName] = fullDetails.name
   const [email, setEmail] = fullDetails.email
   const [request, setRequest] = fullDetails.request
   const [tickets, setTickets] = fullDetails.tickets
   const [ticketType, setTicketType] = fullDetails.ticketType
-
+  
   const [loading, setLoading] = useState(false)
   const [isValidEmail, setisvalid] = useState(true)
   const [mailRequired, setMailRequired] = useState(false)
   const [photoeRequired, setPhotoRequired] = useState(false)
-
+  
   const navigate = useNavigate()
+
+  useEffect(()=>{
+    const details = {
+      'ticketType': ticketType,
+      'tickets': tickets,
+      'imgUrl': imgUrl,
+      'name': name,
+      'email': email,
+      'request': request
+    }
+    
+    localStorage.setItem('details', JSON.stringify(details))
+  }, [fullDetails])
 
   function handleSubmit(e){
     e.preventDefault()
@@ -37,7 +51,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
       return
     }
 
-    const details = {
+    /* const details = {
       'ticketType': ticketType,
       'tickets': tickets,
       'imgUrl': imgUrl,
@@ -45,7 +59,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
       'email': email,
       'request': request
     }
-    localStorage.setItem('details', JSON.stringify(details))
+    localStorage.setItem('details', JSON.stringify(details)) */
 
     navigate('/ready')
   }
@@ -118,13 +132,17 @@ const AttendeeDetails = ( {fullDetails} ) => {
 
   }
 
+  function saveToStorage () {
+
+  }
+
   return (
     <div className="w-full flex justify-center">
 
-      <div className="w-[700px] bg-[#041E23] border border-[#0E464F] p-[48px] mt-[48px] rounded-[40px]">
+      <div className="max-w-[700px] bg-[#041E23] border border-[#0E464F] p-6 sm:p-[48px] mt-[48px] rounded-[40px]">
 
         <div className="flex justify-between items-center">
-          <p className="font-namum text-[32px]">
+          <p className="font-namum text-2xl sm:text-[32px]">
             Attendee Details
           </p>
 
@@ -138,7 +156,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
           </div>
         </div>
 
-        <form className="bg-[#08252B] border border-[#0E464F] w-full rounded-[32px] flex flex-col p-[24px]">
+        <form className="bg-[#08252B] border border-[#0E464F] w-full rounded-[32px] flex flex-col p-6 sm:p-[24px]">
 
           <div className="relative max-w-[556px] p-6 bg-[#052228] border border-[#07373F] rounded-[24px]" >
             <p className="font-roboto text-[16px] mb-2">
@@ -149,7 +167,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
               <div className="w-full flex justify-center items-center  bg-black/20 h-50 absolute">
               </div>
 
-              <div className="size-[240px] bg-[#0E464F] border-4 border-[#24A0B5]/50 rounded-[32px] flex flex-col items-center justify-center z-10 relative overflow-hidden">
+              <div className="size-[180px] sm:size-[240px] bg-[#0E464F] border-4 border-[#24A0B5]/50 rounded-[32px] flex flex-col items-center justify-center z-10 relative overflow-hidden">
 
                 {loading? <SpinningCircles/> : '' }
 
