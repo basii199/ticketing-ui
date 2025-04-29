@@ -139,7 +139,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
   return (
     <div className="w-full flex justify-center">
 
-      <div className="max-w-[700px] bg-[#041E23] border border-[#0E464F] p-6 sm:p-[48px] mt-[48px] rounded-[40px]">
+      <div className="max-w-[700px] w-full bg-[#041E23] border border-[#0E464F] p-6 sm:p-[48px] mt-[48px] rounded-[40px]">
 
         <div className="flex justify-between items-center">
           <p className="font-namum text-2xl sm:text-[32px]">
@@ -158,7 +158,7 @@ const AttendeeDetails = ( {fullDetails} ) => {
 
         <form className="bg-[#08252B] border border-[#0E464F] w-full rounded-[32px] flex flex-col p-6 sm:p-[24px]">
 
-          <div className="relative max-w-[556px] p-6 bg-[#052228] border border-[#07373F] rounded-[24px]" >
+          <div className="relative max-w-[556px] w-full p-6 bg-[#052228] border border-[#07373F] rounded-[24px]" >
             <p className="font-roboto text-[16px] mb-2">
               Upload Profile Photo
             </p>
